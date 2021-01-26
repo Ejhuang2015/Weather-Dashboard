@@ -1,0 +1,159 @@
+/* ----- 0. Basic Formatting Options----- */
+/* Center contents */
+.centered {
+    text-align: center;
+    margin: auto;
+}
+
+/* Display content in Column */
+.flexCol {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Add in a border */
+.bordered {
+    border: 2px solid rgb(128,251,242);
+    padding: 2px;
+}
+
+/* Curve the border */
+.borderCurved {
+    border-radius: 25px;
+}
+
+/* ----- 1. Content Formatting Options----- */
+/* HTML Style */
+html {
+    background: rgb(127,177,186);
+}
+
+/* Body Style */
+body {
+    background: transparent;
+    color:rgb(22,58,84);
+}
+
+/* Header Style */
+.header {
+    background-color: rgb(238,255,251, 0.5);
+    padding: 10px;
+    border-bottom: solid 2px rgb(128,251,242);
+}
+.title {
+    padding: 10px 0px;
+}
+
+/* Main Content Container */
+.container {
+    display: flex;
+    justify-content: space-between;
+    background: rgb(238,255,251,0.50);
+    width: 100%;
+    margin: 0px auto;
+    padding: 0px;
+}
+
+/* ----- 2. Element Formatting Options----- */
+/* Anchor Tags */
+a:link {
+    color: rgb(22,58,84);
+}
+a:visited {
+    color: rgb(22, 31, 84);
+}
+a:hover, 
+a:active {
+    color: rgb(95, 163, 252);
+}
+
+/* Button Tags */
+.button {
+    padding: 12px 20px;
+    border: none;
+}
+
+.buttonBlue {
+    background-color: rgb(238,255,251);
+    color: rgb(22,58,84);
+}
+.buttonBlue:hover, 
+.buttonBlue:active {
+    background-color: rgb(32, 77, 83);
+    color: rgb(195, 230, 233);
+}
+
+/* Text Input Tags */
+input[type=text] {
+    margin: 5px 0px;
+    padding: 12px;
+    border: 1px solid rgb(128,251,242);
+    resize: vertical;
+}
+
+/* h1-6 Styling */
+h1 {
+    font-size: 50px;
+    font-weight: bold;
+}
+h2 {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+/* ----- 3. Application Specific Formatting ----- */
+/* Sidebar Panel */
+.sidebar {
+    background-color: rgb(238,255,251,0.75);
+    margin: 0px;
+    padding: 10px;
+}
+
+#searchInput {
+    height:50px;
+}
+
+#searchButton {
+    height: 50px;
+    margin: 5px 0px;
+    border: 1px solid rgb(128,251,242);
+}
+
+.searchHistory {
+    background-color: rgb(238,255,251,0.75);
+    padding: 5px;
+}
+
+/* Forecast Panel */
+.forecastPanel {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.forecastCard {
+    padding: 5px;
+    background-color: rgb(91, 207, 192);
+    width: 150px;
+}
+
+/* Images and Icons */
+.weatherIcon {
+    width: 25px;
+    height: 25px;
+}
+
+
+
+/* Notes
+border-color: rgb(128,251,242)
+Text color: rgb(22,58,84);
+background-color: rgb(238,255,251,0.5);
+
+Hover color: rgb(95, 163, 252);
+
+Footer Gradient
+border-image: radial-gradient(#80acff, rgb(128,251,242)) 1; 
+*/

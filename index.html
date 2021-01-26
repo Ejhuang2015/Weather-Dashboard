@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="Description"
+    content="Edward Huang's Weather Dashboard. A small practice application that presents the user the current 5 day weather for a city they search">
+
+  <!-- Stylesheet Links -->
+  <!-- Fonts -->
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+  <!-- Reset/Custom CSS -->
+  <link rel="stylesheet" href="./assets/reset.css">
+  <link rel="stylesheet" href="./assets/style.css">
+
+  <!-- Favicon -->
+  <!-- <link rel="icon" href="./assets/Signature.png"> -->
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+
+  <title>Weather Dashboard</title>
+</head>
+
+<body>
+  <!-- Header -->
+  <div class="header centered">
+    <h1 class="headerText">Weather Dashboard</h1>
+  </div>
+
+  <!-- Main body container -->
+  <div class="container row">
+    <!-- Sidebar Wrapper -->
+    <div class="wrapper col-3 sidebar">
+      <!-- Search Bar and Header -->
+      <h2 class="sidebarHeader">Search for a city:</h2>
+      <section class="row centered searchBar">
+        <input type="text" class="col-10" id="searchInput" value="Search...">
+        <button class="col-2 buttonBlue" id="searchButton"><img src="https://via.placeholder.com/25x25" alt="" class="searchIcon"></button>
+      </section>
+      <!-- Search History Panel -->
+      <section class="searchHistory bordered centered">Example City (Remove)</section>
+    </div>
+
+    <!-- Page Content Wrapper -->
+    <div class="wrapper col-9 flexCol">
+      <!-- Top Row: Current weather information -->
+      <section class="flexCol" id="weatherCurrent">
+        <h2 class="title">
+          City Date <img class="weatherIcon" src="https://via.placeholder.com/25x25" alt=""/>
+        </h2>
+        <article class="weatherInfo" id="temperature">Temperature: </article>
+        <article class="weatherInfo" id="humidity">Humidity: </article>
+        <article class="weatherInfo" id="windSpeed">Wind speed: </article>
+        <article class="weatherInfo" id="uvIndex">UV Index: </article>
+      </section>
+      <!-- Bottom Row: Five day forecast -->
+      <section class="flexCol" id="weatherForecast">
+        <h2 class="title">5 Day Forecast</h2>
+        <div class="forecastPanel">
+          <section class="forecastCard flexCol bordered" id="card1">
+            <h3 class="title">Date 1</h3>
+            <img class="weatherIcon" src="https://via.placeholder.com/25x25" alt=""/>
+            <article class="weatherInfo cardTemperature">Temp: </article>
+            <article class="weatherInfo cardHumidity">Humidity: </article>
+          </section>
+          <section class="forecastCard flexCol bordered" id="card2">
+            <h3 class="title">Date 2</h3>
+            <img class="weatherIcon" src="https://via.placeholder.com/25x25" alt=""/>
+            <article class="weatherInfo cardTemperature">Temperature</article>
+            <article class="weatherInfo cardHumidity">Humidity</article>
+          </section>
+          <section class="forecastCard flexCol bordered" id="card3">
+            <h3 class="title">Date 3</h3>
+            <img class="weatherIcon" src="https://via.placeholder.com/25x25" alt=""/>
+            <article class="weatherInfo cardTemperature">Temperature</article>
+            <article class="weatherInfo cardHumidity">Humidity</article>
+          </section>
+          <section class="forecastCard flexCol bordered" id="card4">
+            <h3 class="title">Date 4</h3>
+            <img class="weatherIcon" src="https://via.placeholder.com/25x25" alt=""/>
+            <article class="weatherInfo cardTemperature">Temperature</article>
+            <article class="weatherInfo cardHumidity">Humidity</article>
+          </section>
+          <section class="forecastCard flexCol bordered" id="card5">
+            <h3 class="title">Date 5</h3>
+            <img class="weatherIcon" src="https://via.placeholder.com/25x25" alt=""/>
+            <article class="weatherInfo cardTemperature">Temperature</article>
+            <article class="weatherInfo cardHumidity">Humidity</article>
+          </section>
+        </div>
+      </section>
+    </div>
+  </div>
+
+
+  <!-- Footer panel -->
+  <div class="footer">
+
+  </div>
+
+</body>
+
+<!-- JavaScripts -->
+<!-- Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+  integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"
+  integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+
+<!-- Custom -->
+<script type="text/javascript" src="./assets/script.js"></script>
+
+</html>
