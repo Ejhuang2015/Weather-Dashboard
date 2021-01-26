@@ -28,6 +28,12 @@ $(document).ready(function () {
     const apiKey = "d1bff1b060b3a573f9a0a76eda085425";
 
 // Handlers
+    // On enter press while in the input field
+    $(searchInput).on("keyup", function (event){
+        if (event.keyCode === 13) {
+            updateHistory();
+        }
+    });
     // Search Button click
     $(searchButton).on("click", updateHistory);
     // History Panel box click
