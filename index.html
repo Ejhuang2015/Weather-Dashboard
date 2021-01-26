@@ -21,9 +21,10 @@
   <!-- Favicon -->
   <!-- <link rel="icon" href="./assets/Signature.png"> -->
 
+  <!-- Luxon -->
+  <script src="https://cdn.jsdelivr.net/npm/luxon@1.25.0/build/global/luxon.min.js"></script>
   <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 
   <title>Weather Dashboard</title>
 </head>
@@ -41,61 +42,40 @@
       <!-- Search Bar and Header -->
       <h2 class="sidebarHeader">Search for a city:</h2>
       <section class="row centered searchBar">
-        <input type="text" class="col-10" id="searchInput" value="Search...">
-        <button class="col-2 buttonBlue" id="searchButton"><img src="https://via.placeholder.com/25x25" alt="" class="searchIcon"></button>
+        <input type="text" class="col-10" id="searchInput" value="">
+        <button class="col-2 buttonBlue" id="searchButton"><img src="./assets/search.png" alt="" class="searchIcon"></button>
       </section>
       <!-- Search History Panel -->
-      <section class="searchHistory bordered centered">Example City (Remove)</section>
+      <section id="historyPanel"></section>
     </div>
 
     <!-- Page Content Wrapper -->
-    <div class="wrapper col-9 flexCol">
+    <div class="wrapper col-9 flexCol invis" id="mainWrapper">
       <!-- Top Row: Current weather information -->
       <section class="flexCol" id="weatherCurrent">
-        <h2 class="title">
-          City Date <img class="weatherIcon" src="https://via.placeholder.com/25x25" alt=""/>
-        </h2>
-        <article class="weatherInfo" id="temperature">Temperature: </article>
-        <article class="weatherInfo" id="humidity">Humidity: </article>
-        <article class="weatherInfo" id="windSpeed">Wind speed: </article>
-        <article class="weatherInfo" id="uvIndex">UV Index: </article>
+        <article class="title" id="cityHeader">
+          <h2 id="cityHeaderText">No City Listed </h2> 
+          <img class="weatherIcon" id="headerIcon" src="//:0" alt=""/>
+        </article>
+        <article class="weatherInfo" id="temperature">Temperature: -</article>
+        <article class="weatherInfo" id="humidity">Humidity: -</article>
+        <article class="weatherInfo" id="windSpeed">Wind speed: -</article>
+        <article class="weatherInfo singleLine">UV Index: <article class="weatherInfo singleLine" id="uvIndex">-</article></article>
       </section>
       <!-- Bottom Row: Five day forecast -->
       <section class="flexCol" id="weatherForecast">
         <h2 class="title">5 Day Forecast</h2>
-        <div class="forecastPanel">
-          <section class="forecastCard flexCol bordered" id="card1">
-            <h3 class="title">Date 1</h3>
-            <img class="weatherIcon" src="https://via.placeholder.com/25x25" alt=""/>
-            <article class="weatherInfo cardTemperature">Temp: </article>
-            <article class="weatherInfo cardHumidity">Humidity: </article>
-          </section>
-          <section class="forecastCard flexCol bordered" id="card2">
-            <h3 class="title">Date 2</h3>
-            <img class="weatherIcon" src="https://via.placeholder.com/25x25" alt=""/>
-            <article class="weatherInfo cardTemperature">Temperature</article>
-            <article class="weatherInfo cardHumidity">Humidity</article>
-          </section>
-          <section class="forecastCard flexCol bordered" id="card3">
-            <h3 class="title">Date 3</h3>
-            <img class="weatherIcon" src="https://via.placeholder.com/25x25" alt=""/>
-            <article class="weatherInfo cardTemperature">Temperature</article>
-            <article class="weatherInfo cardHumidity">Humidity</article>
-          </section>
-          <section class="forecastCard flexCol bordered" id="card4">
-            <h3 class="title">Date 4</h3>
-            <img class="weatherIcon" src="https://via.placeholder.com/25x25" alt=""/>
-            <article class="weatherInfo cardTemperature">Temperature</article>
-            <article class="weatherInfo cardHumidity">Humidity</article>
-          </section>
-          <section class="forecastCard flexCol bordered" id="card5">
-            <h3 class="title">Date 5</h3>
-            <img class="weatherIcon" src="https://via.placeholder.com/25x25" alt=""/>
-            <article class="weatherInfo cardTemperature">Temperature</article>
-            <article class="weatherInfo cardHumidity">Humidity</article>
-          </section>
-        </div>
+        <div class="forecastPanel"></div>
       </section>
+    </div>
+  </div>
+
+  <!-- Error Modal -->
+  <div id="errModal" class="modal">
+    <!-- Modal content -->
+    <div class="modalContent">
+      <span class="closeModal">&times;</span>
+      <p id="errorContent" class="centered">Some error text</p>
     </div>
   </div>
 

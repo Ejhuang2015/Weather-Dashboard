@@ -12,6 +12,21 @@
     justify-content: center;
 }
 
+/* Hide content */
+.invis {
+    display: none;
+}
+
+/* Show content */
+.appear {
+    display: block;
+}
+
+/* Display content in a single line */
+.singleLine {
+    display: initial;
+}
+
 /* Add in a border */
 .bordered {
     border: 2px solid rgb(128,251,242);
@@ -53,6 +68,48 @@ body {
     width: 100%;
     margin: 0px auto;
     padding: 0px;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+/* Modal Content */
+.modalContent {
+    background-color: rgb(238,255,251);
+    font-size: 25px;
+    margin: auto;
+    padding: 20px;
+    padding-bottom: 30px;
+    border: 4px solid rgb(128,251,242);
+    width: 80%;
+}
+  
+/* The Close Button */
+.closeModal {
+    display: flex;
+    flex-direction: row-reverse;
+    color: #aaaaaa;
+    font-size: 28px;
+    font-weight: bold;
+}
+  
+.closeModal:hover,
+.closeModal:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 /* ----- 2. Element Formatting Options----- */
@@ -121,8 +178,39 @@ h2 {
 }
 
 .searchHistory {
+    font-size: 20px;
     background-color: rgb(238,255,251,0.75);
     padding: 5px;
+    margin: 5px 0px;
+    cursor: pointer;
+}
+
+/* Current Weather Panel */
+.weatherInfo {
+    font-size: 20px;
+    padding: 5px 0px;
+}
+
+#cityHeaderText {
+    vertical-align: middle;
+    display: inline-block;
+}
+
+#uvIndex {
+    border-radius: 10px;
+}
+
+.highlightRed {
+    background-color: rgb(226, 85, 85);
+}
+.highlightOrange {
+    background-color: rgb(252, 189, 73);
+}
+.highlightYellow {
+    background-color: rgb(250, 250, 92);
+}
+.highlightGreen {
+    background-color: rgb(92, 250, 105);
 }
 
 /* Forecast Panel */
@@ -139,10 +227,25 @@ h2 {
     width: 150px;
 }
 
+.forecastTitle {
+    font-size: 25px;
+    font-weight: bold;
+}
+
 /* Images and Icons */
-.weatherIcon {
+.searchIcon {
     width: 25px;
     height: 25px;
+}
+
+.weatherIcon {
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+}
+
+.forecastIcon {
+    margin: auto;
 }
 
 
