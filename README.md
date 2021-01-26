@@ -1,6 +1,7 @@
 # Weather-Dashboard
 
 This project is a practice on using api and ajax. It is weather checking application where the user can enter in a city and find the its current weather, temperature, 5 day update and more. The application also keeps track of past cities that the user has searched for and can quickly bring up the latest information for that city. On a page load, the last city to be manually searched for is brought up. A clear button is provided to clear the search history.
+View the deployed project here: https://ejhuang2015.github.io/Weather-Dashboard/
 
 ## Prerequisites
 
