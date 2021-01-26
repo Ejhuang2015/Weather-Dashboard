@@ -1,6 +1,6 @@
 # Weather-Dashboard
 
-This project is a practice on using api and ajax. It is weather checking application where the user can enter in a city/town and find the current weather, as well as the 5 day update, for that city/town. The user is also able to list multiple cities/towns to view all at once.
+This project is a practice on using api and ajax. It is weather checking application where the user can enter in a city and find the its current weather, temperature, 5 day update and more. The application also keeps track of past cities that the user has searched for and can quickly bring up the latest information for that city. On a page load, the last city to be manually searched for is brought up. A clear button is provided to clear the search history.
 
 ## Prerequisites
 
@@ -19,7 +19,7 @@ Thanks to the following people who have contributed to this project:
 If you want to contact me you can reach me at <ejhuang.2015@gmail.com>.
 
 ## License
-### Copyright (c) [2020] [Edward Huang]
+### Copyright (c) [2021] [Edward Huang]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
