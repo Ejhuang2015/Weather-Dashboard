@@ -136,8 +136,10 @@ a:active {
 }
 
 .buttonBlue {
-    background-color: rgb(238,255,251);
+    border-radius: 5px;
+    background-color:  rgb(224, 245, 243);
     color: rgb(22,58,84);
+    border-color: rgb(128,251,242);
 }
 .buttonBlue:hover, 
 .buttonBlue:active {
