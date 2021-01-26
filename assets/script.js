@@ -18,6 +18,8 @@ $(document).ready(function () {
     const modal = document.querySelector("#errModal");
     const closeModal = document.querySelector(".closeModal");
     const errorContent = document.querySelector("#errorContent");
+    // Footer Panel Elements
+    const clearButton = document.querySelector("#clearButton");
     // Saved Search History Array
     var searchHistoryArray = [];
     // Luxon Date and Time
@@ -32,13 +34,34 @@ $(document).ready(function () {
     $(document).on("click", ".searchHistory", function(){
         searchCityWeather(this.textContent,false);
     });
-
+    // Clear Button click
+    $(clearButton).on("click", function(){
+        // Hide the weather panel
+        $(mainWrapper).addClass("invis");
+        // Reset the search history array
+        searchHistoryArray = [];
+        // Save the empty array into the local storage data
+        localStorage.setItem("weatherHistoryData", JSON.stringify(searchHistoryArray)); 
+        // Clear the panels of previous data
+        cityHeader.innerHTML = "";
+        cityHeaderIcon.src = "";
+        cityHeaderIcon.alt = "";
+        temperature.innerHTML = "";
+        humidity.innerHTML = "";
+        windSpeed.innerHTML = "";
+        $(historyPanel).empty();
+        $(forecastPanel).empty();
+    });
+    
 // Functions
     // Load search history if available
     function loadSaveData () {
         // Grab the local storage data
         var storedSearchData = JSON.parse(localStorage.getItem("weatherHistoryData"));
-        if (!storedSearchData){
+        console.log(storedSearchData);
+        // Check if stored data is empty or non-existent
+        if (!storedSearchData || storedSearchData.length == 0){
+            console.log("No saved data");
             return;
         }
         else {
@@ -61,8 +84,9 @@ $(document).ready(function () {
         let newCity = $(searchInput).val().trim();
         // Clear the search bar now that data is saved
         searchInput.value = "";
-        // Do nothing if the search bar is empty
+        // Bring up the empy error modal if search bar is empty
         if (!newCity){
+            emptyModal();
             return;
         }
         else {
@@ -80,13 +104,14 @@ $(document).ready(function () {
             url: queryURL,
             method: "GET",
             error: function (err) {
+                // Opens the error modal if an error is returned
                 errorModal(err);
             }
         }).then(function (response) {
             updateCurrentWeather(response);
             // Only update the array if the search button is pressed and not on reload
             if (activateUpdateArray == true) {
-                updateArray(cityName);
+                updateArray(response.name);
                 // Remove the invis class
                 $(mainWrapper).removeClass("invis");
             }
@@ -169,7 +194,12 @@ $(document).ready(function () {
         localStorage.setItem("weatherHistoryData", JSON.stringify(searchHistoryArray)); 
     }
 
-
+    // Modal- Display empty error modal
+    function emptyModal() {
+        modal.style.display = "block";
+        errorContent.innerHTML = "Please enter a city name!";
+    }
+    
     // Modal- Display error modal
     function errorModal(err) {
         modal.style.display = "block";

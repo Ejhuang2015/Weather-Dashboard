@@ -237,6 +237,14 @@ h2 {
     font-weight: bold;
 }
 
+/* Footer Panel */
+#clearButton {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-top: 10px;
+}
+
 /* Images and Icons */
 .searchIcon {
     width: 25px;
