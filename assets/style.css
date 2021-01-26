@@ -175,7 +175,14 @@ h2 {
     height: 50px;
     margin: 5px 0px;
     border: 1px solid rgb(128,251,242);
+    background-color: rgb(91, 207, 192);
+    border-radius: 0px 10px 10px 0px;
 }
+#searchButton:hover, 
+#searchButton:active {
+    background-color: rgb(35, 114, 103);
+}
+
 
 .searchHistory {
     font-size: 20px;
