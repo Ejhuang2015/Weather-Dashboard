@@ -2,6 +2,7 @@ $(document).ready(function () {
 // Variables
     // Search Panel Elements
     const searchButton = document.querySelector("#searchButton");
+    const searchInput = document.querySelector("#searchInput");
     const historyPanel = document.querySelector("#historyPanel");
     // Current Weather Panel Elements
     const mainWrapper = document.querySelector("#mainWrapper");
@@ -29,48 +30,48 @@ $(document).ready(function () {
     $(searchButton).on("click", updateHistory);
     // History Panel box click
     $(document).on("click", ".searchHistory", function(){
-        searchCityWeather(this.textContent);
+        searchCityWeather(this.textContent,false);
     });
 
 // Functions
     // Load search history if available
     function loadSaveData () {
-        if (!searchHistoryArray[0]){
-            console.log("No saved data");
+        // Grab the local storage data
+        var storedSearchData = JSON.parse(localStorage.getItem("weatherHistoryData"));
+        if (!storedSearchData){
+            return;
         }
         else {
-            // Remove the invis class from the main wrapper as soon as search data is available
+            // Remove the invis class from the main wrapper if there is saved data
             $(mainWrapper).removeClass("invis");
-            // -------------***********---------- Overwrite array based on localstorage (Look at the work day scheduler)
+            // Overwrite array based on localstorage
+            storedSearchData.forEach((item) =>{
+                searchHistoryArray = [...storedSearchData];
+            });
             for (i = 0; i < searchHistoryArray.length; i++) {
-                $(historyPanel).prepend('<button class="searchHistory bordered centered">' + searchHistoryArray[i] + '</button>');
+                $(historyPanel).append('<article class="searchHistory bordered centered">' + searchHistoryArray[i] + '</article>');
             }
+            // Search city based on last search but don't update the array
+            searchCityWeather(searchHistoryArray[0],false);
         }
     }
     
     function updateHistory(){
-        // Remove the invis class from the main wrapper as soon as search data is available
-        $(mainWrapper).removeClass("invis");
-        
         // The city grabbed from the search bar
-        let newCity = $("#searchInput").val().trim();
+        let newCity = $(searchInput).val().trim();
+        // Clear the search bar now that data is saved
+        searchInput.value = "";
         // Do nothing if the search bar is empty
         if (!newCity){
             return;
         }
         else {
-            // Append the newCity information to the search history array
-            searchHistoryArray.unshift(newCity);
-            console.log("Array: " + searchHistoryArray);
-            // Add a box for each city in the search history array
-            $(historyPanel).prepend('<article class="searchHistory bordered centered">' + newCity + '</article>');
-
-            // Search city based on the last new city
-            searchCityWeather(searchHistoryArray[0]);
+            // Search city based on the input and reload array
+            searchCityWeather(newCity,true);
         }
     }
     
-    function searchCityWeather(cityName) {
+    function searchCityWeather(cityName,activateUpdateArray) {
         // The URL link to get information from OpenWeather
         let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial&appid=" + apiKey;
 
@@ -82,8 +83,13 @@ $(document).ready(function () {
                 errorModal(err);
             }
         }).then(function (response) {
-            console.log(response);
             updateCurrentWeather(response);
+            // Only update the array if the search button is pressed and not on reload
+            if (activateUpdateArray == true) {
+                updateArray(cityName);
+                // Remove the invis class
+                $(mainWrapper).removeClass("invis");
+            }
         });
     }
 
@@ -151,6 +157,16 @@ $(document).ready(function () {
                 // Append the humidity information
                 .append('<article class="weatherInfo cardHumidity">Humidity: ' + forecastData.humidity + '%</article>');
         }
+    }
+
+    // Updates the array and history
+    function updateArray(newCity) {
+        // Add a box for the new city in the history
+        $(historyPanel).prepend('<article class="searchHistory bordered centered">' + newCity + '</article>');
+        // Append the newCity information to the search history array
+        searchHistoryArray.unshift(newCity);
+        // Save the updated array into local storage
+        localStorage.setItem("weatherHistoryData", JSON.stringify(searchHistoryArray)); 
     }
 
 

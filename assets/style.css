@@ -186,6 +186,10 @@ h2 {
 }
 
 /* Current Weather Panel */
+.wrapper {
+    justify-content: flex-start;
+}
+
 .weatherInfo {
     font-size: 20px;
     padding: 5px 0px;
@@ -222,6 +226,7 @@ h2 {
 }
 
 .forecastCard {
+    border-radius: 5px;
     padding: 5px;
     background-color: rgb(91, 207, 192);
     width: 150px;
