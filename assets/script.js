@@ -29,7 +29,7 @@ $(document).ready(function () {
 
 // Handlers
     // On enter press while in the input field
-    $(searchInput).on("keyup", function (event){
+    $(searchInput).on("keyup", function (event) {
         if (event.keyCode === 13) {
             updateHistory();
         }
@@ -37,17 +37,17 @@ $(document).ready(function () {
     // Search Button click
     $(searchButton).on("click", updateHistory);
     // History Panel box click
-    $(document).on("click", ".searchHistory", function(){
-        searchCityWeather(this.textContent,false);
+    $(document).on("click", ".searchHistory", function () {
+        searchCityWeather(this.textContent, false);
     });
     // Clear Button click
-    $(clearButton).on("click", function(){
+    $(clearButton).on("click", function () {
         // Hide the weather panel
         $(mainWrapper).addClass("invis");
         // Reset the search history array
         searchHistoryArray = [];
         // Save the empty array into the local storage data
-        localStorage.setItem("weatherHistoryData", JSON.stringify(searchHistoryArray)); 
+        localStorage.setItem("weatherHistoryData", JSON.stringify(searchHistoryArray));
         // Clear the panels of previous data
         cityHeader.innerHTML = "";
         cityHeaderIcon.src = "";
@@ -58,50 +58,50 @@ $(document).ready(function () {
         $(historyPanel).empty();
         $(forecastPanel).empty();
     });
-    
+
 // Functions
     // Load search history if available
-    function loadSaveData () {
+    function loadSaveData() {
         // Grab the local storage data
         var storedSearchData = JSON.parse(localStorage.getItem("weatherHistoryData"));
-        console.log(storedSearchData);
         // Check if stored data is empty or non-existent
-        if (!storedSearchData || storedSearchData.length == 0){
-            console.log("No saved data");
+        if (!storedSearchData || storedSearchData.length == 0) {
             return;
         }
         else {
             // Remove the invis class from the main wrapper if there is saved data
             $(mainWrapper).removeClass("invis");
             // Overwrite array based on localstorage
-            storedSearchData.forEach((item) =>{
+            storedSearchData.forEach((item) => {
                 searchHistoryArray = [...storedSearchData];
             });
             for (i = 0; i < searchHistoryArray.length; i++) {
                 $(historyPanel).append('<article class="searchHistory bordered centered">' + searchHistoryArray[i] + '</article>');
             }
             // Search city based on last search but don't update the array
-            searchCityWeather(searchHistoryArray[0],false);
+            searchCityWeather(searchHistoryArray[0], false);
         }
     }
-    
-    function updateHistory(){
+
+    // Gets the search bar's input and launches the search function
+    function updateHistory() {
         // The city grabbed from the search bar
         let newCity = $(searchInput).val().trim();
         // Clear the search bar now that data is saved
         searchInput.value = "";
         // Bring up the empy error modal if search bar is empty
-        if (!newCity){
+        if (!newCity) {
             emptyModal();
             return;
         }
         else {
             // Search city based on the input and reload array
-            searchCityWeather(newCity,true);
+            searchCityWeather(newCity, true);
         }
     }
-    
-    function searchCityWeather(cityName,activateUpdateArray) {
+
+    // Calls tge OpenWeather API based on user terms
+    function searchCityWeather(cityName, activateUpdateArray) {
         // The URL link to get information from OpenWeather
         let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial&appid=" + apiKey;
 
@@ -125,9 +125,11 @@ $(document).ready(function () {
     }
 
     // Update current weather information
-    function updateCurrentWeather (data) {
-        // Gets the current time of searched city in UTC
-        var localTime = DateTime.fromSeconds(data.dt);
+    function updateCurrentWeather(data) {
+        // Calculate the time after the timezone offset
+        var timeWithZone = parseInt(data.dt) + parseInt(data.timezone);
+        // Parse the Unix into readable time
+        var localTime = DateTime.fromSeconds(timeWithZone);
         // Sets the information
         cityHeader.innerHTML = data.name + " " + localTime.month + "/" + localTime.day + "/" + localTime.year;
         cityHeaderIcon.src = "http://openweathermap.org/img/wn/" + data.weather[0].icon + ".png";
@@ -146,8 +148,6 @@ $(document).ready(function () {
                 errorModal(err);
             }
         }).then(function (response) {
-            console.log("One Call API: ");
-            console.log(response);
             updateForecast(response);
         });
     }
@@ -157,13 +157,13 @@ $(document).ready(function () {
         // Get UV index and adds the appropriate class highlight
         var uvIndexReturn = data.current.uvi;
         uvIndex.innerHTML = uvIndexReturn;
-        if (uvIndexReturn <= 2){
+        if (uvIndexReturn <= 2) {
             $(uvIndex).attr("class", "weatherInfo singleLine highlightGreen");
         }
-        else if (2 < uvIndexReturn && uvIndexReturn <= 5){
+        else if (2 < uvIndexReturn && uvIndexReturn <= 5) {
             $(uvIndex).attr("class", "weatherInfo singleLine highlightYellow");
         }
-        else if (5 < uvIndexReturn && uvIndexReturn <= 7){
+        else if (5 < uvIndexReturn && uvIndexReturn <= 7) {
             $(uvIndex).attr("class", "weatherInfo singleLine highlightOrange");
         }
         else {
@@ -176,11 +176,14 @@ $(document).ready(function () {
         for (i = 1; i < 6; i++) {
             // Get the forecast date
             var forecastData = data.daily[i];
-            var forecastTime = DateTime.fromSeconds(forecastData.dt);
+            // Calculate the time after the timezone offset
+            var timeWithZone = parseInt(forecastData.dt) + parseInt(data.timezone_offset);
+            // Parse the Unix into readable time
+            var forecastTime = DateTime.fromSeconds(timeWithZone);
             // Append main card container
             $(forecastPanel).append('<section class="forecastCard flexCol col-md-2 bordered centered" id="card' + i + '"></section>');
             // Append the details to the card container
-            $("#card" + i).append('<h3 class="forecastTitle">' + forecastTime.month + "/" + forecastTime.day + "/" + forecastTime.year +'</h3>')
+            $("#card" + i).append('<h3 class="forecastTitle">' + forecastTime.month + "/" + forecastTime.day + "/" + forecastTime.year + '</h3>')
                 // Append the weather image
                 .append('<img class="weatherIcon forecastIcon" src="http://openweathermap.org/img/wn/' + forecastData.weather[0].icon + '.png" alt="' + forecastData.weather[0].description + ' weather icon"/>')
                 // Append the temperature information
@@ -197,7 +200,7 @@ $(document).ready(function () {
         // Append the newCity information to the search history array
         searchHistoryArray.unshift(newCity);
         // Save the updated array into local storage
-        localStorage.setItem("weatherHistoryData", JSON.stringify(searchHistoryArray)); 
+        localStorage.setItem("weatherHistoryData", JSON.stringify(searchHistoryArray));
     }
 
     // Modal- Display empty error modal
@@ -205,7 +208,7 @@ $(document).ready(function () {
         modal.style.display = "block";
         errorContent.innerHTML = "Please enter a city name!";
     }
-    
+
     // Modal- Display error modal
     function errorModal(err) {
         modal.style.display = "block";
@@ -224,7 +227,7 @@ $(document).ready(function () {
         }
     }
 
-    // Initialize
+// Initialize
     function initMain() {
         loadSaveData();
     }
