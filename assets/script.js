@@ -178,7 +178,7 @@ $(document).ready(function () {
             var forecastData = data.daily[i];
             var forecastTime = DateTime.fromSeconds(forecastData.dt);
             // Append main card container
-            $(forecastPanel).append('<section class="forecastCard flexCol bordered centered" id="card' + i + '"></section>');
+            $(forecastPanel).append('<section class="forecastCard flexCol col-md-2 bordered centered" id="card' + i + '"></section>');
             // Append the details to the card container
             $("#card" + i).append('<h3 class="forecastTitle">' + forecastTime.month + "/" + forecastTime.day + "/" + forecastTime.year +'</h3>')
                 // Append the weather image

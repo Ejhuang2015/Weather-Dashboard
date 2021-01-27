@@ -38,19 +38,19 @@
   <!-- Main body container -->
   <div class="container row">
     <!-- Sidebar Wrapper -->
-    <div class="wrapper col-3 sidebar">
+    <div class="wrapper col-md-3 sidebar">
       <!-- Search Bar and Header -->
       <h2 class="sidebarHeader">Search for a city:</h2>
       <section class="row centered searchBar">
-        <input type="text" class="col-10" id="searchInput" value="">
-        <button class="col-2" id="searchButton"><img src="./assets/search.png" alt="" class="searchIcon"></button>
+        <input type="text" class="col-md-10" id="searchInput" value="">
+        <button class="col-md-2" id="searchButton"><img src="./assets/search.png" alt="" class="searchIcon"></button>
       </section>
       <!-- Search History Panel -->
       <section id="historyPanel"></section>
     </div>
 
     <!-- Weather Content Wrapper -->
-    <div class="wrapper col-9 flexCol invis" id="mainWrapper">
+    <div class="wrapper col-md-9 flexCol invis" id="mainWrapper">
       <!-- Top Row: Current weather information -->
       <section class="flexCol" id="weatherCurrent">
         <article class="title centered" id="cityHeader">
@@ -65,7 +65,7 @@
       <!-- Bottom Row: Five day forecast -->
       <section class="flexCol" id="weatherForecast">
         <h2 class="title centered">5 Day Forecast</h2>
-        <div class="forecastPanel"></div>
+        <div class="forecastPanel row"></div>
       </section>
     </div>
   </div>
